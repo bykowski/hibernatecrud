@@ -16,6 +16,8 @@ public class Drug {
     @Column(name = "prod_year")
     private LocalDate prodYear;
     private BigDecimal price;
+
+    @Transient
     private long age;
 
     @Enumerated(EnumType.STRING)
@@ -24,7 +26,6 @@ public class Drug {
     @PostLoad
     public void calculateAge() {
         age = ChronoUnit.YEARS.between(prodYear, LocalDate.now());
-        System.out.println("calculateAge!");
     }
 
 
