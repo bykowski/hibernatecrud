@@ -3,19 +3,30 @@ package src;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Entity
+@Table(name = "drugs")
 public class Drug {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name = "prod_year")
     private LocalDate prodYear;
     private BigDecimal price;
+    private long age;
 
     @Enumerated(EnumType.STRING)
     private DrugType drugType;
+
+    @PostLoad
+    public void calculateAge() {
+        age = ChronoUnit.YEARS.between(prodYear, LocalDate.now());
+        System.out.println("calculateAge!");
+    }
+
 
     public DrugType getDrugType() {
         return drugType;
@@ -64,6 +75,7 @@ public class Drug {
                 ", name='" + name + '\'' +
                 ", prodYear=" + prodYear +
                 ", price=" + price +
+                ", age=" + age +
                 ", drugType=" + drugType +
                 '}';
     }
