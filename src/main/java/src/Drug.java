@@ -1,9 +1,6 @@
 package src;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,6 +13,8 @@ public class Drug {
     private String name;
     private LocalDate prodYear;
     private BigDecimal price;
+
+    @Enumerated(EnumType.STRING)
     private DrugType drugType;
 
     public DrugType getDrugType() {
@@ -56,5 +55,16 @@ public class Drug {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Drug{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", prodYear=" + prodYear +
+                ", price=" + price +
+                ", drugType=" + drugType +
+                '}';
     }
 }

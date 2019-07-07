@@ -14,5 +14,8 @@ public class Start {
         drug.setProdYear(LocalDate.of(1986, 04, 30));
         drug.setDrugType(DrugType.SOFT);
         drugDao.saveDrug(drug);
+
+        System.out.println(drugDao.readDrug(1L));
+
     }
 }
